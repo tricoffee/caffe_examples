@@ -13,11 +13,12 @@
 #include <caffe/layers/memory_data_layer.hpp>
 #include <caffe/layers/sigmoid_cross_entropy_loss_layer.hpp>
 #include <caffe/layers/euclidean_loss_layer.hpp>
+#include <caffe/layers/inner_product_layer.hpp>
 
 int requested_to_exit = 0;
 
 using namespace std;
-
+using namespace caffe;
 
 double
 get_time()
@@ -67,10 +68,6 @@ main()
 	boost::shared_ptr<caffe::Net<float>> net;
 
 	caffe::SolverParameter solver_param;
-
-	caffe::Caffe::SetDevice(0);
-	caffe::Caffe::set_mode(caffe::Caffe::GPU);
-	//caffe::Caffe::set_mode(caffe::Caffe::CPU);
 
 	caffe::ReadProtoFromTextFileOrDie("solver.prototxt", &solver_param);
 	solver.reset(caffe::SolverRegistry<float>::CreateSolver(solver_param));
